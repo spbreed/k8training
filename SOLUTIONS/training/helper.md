@@ -56,3 +56,6 @@ tolerations:
 3) troubleshoot pods
 4) dns services and pods nslookups
 5) etcd 
+6) static pods, system ctl pods
+7) init containers
+8) Rollout history
