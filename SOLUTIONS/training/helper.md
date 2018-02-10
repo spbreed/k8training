@@ -50,3 +50,9 @@ tolerations:
   operator: Equal
   value: experimental
   effect: NoSchedule
+  
+1) Get pods in a service
+2) troubleshoor services
+3) troubleshoot pods
+4) dns services and pods nslookups
+5) etcd 
