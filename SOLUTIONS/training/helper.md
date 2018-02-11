@@ -39,6 +39,10 @@ Where x.x.x.x, y.y.y.y, z.z.z.z, and a.a.a.a are the internal IP addresses of yo
 Restart the NFS server with the command sudo systemctl restart nfs-kernel-server.
 2. Log in to each of your Kubernetes nodes, including the master, and execute the command sudo apt install nfs-common
 
+create pv
+create pvc
+create volume
+
 #Taints and Tolerations:
 This Pod can be scheduled on a node that has the taint 
 dedicated=experimental:NoSchedule:
@@ -50,6 +54,45 @@ tolerations:
   operator: Equal
   value: experimental
   effect: NoSchedule
+
+kubectl create namespace office
+
+#Create User :
+
+openssl genrsa -out employee.key 2048
+openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=bitnami"
+openssl x509 -req -in employee.csr -CA CA_LOCATION/ca.crt -CAkey CA_LOCATION/ca.key -CAcreateserial -out employee.crt -days 500
+kubectl config set-credentials employee --client-certificate=/home/employee/.certs/employee.crt  --client-key=/home/employee/.certs/employee.key
+kubectl config set-context employee-context --cluster=minikube --namespace=office --user=employee
+kubectl --context=employee-context get pods
+
+#Create Role
+
+kind: Role
+  apiVersion: rbac.authorization.k8s.io/v1beta1
+  metadata:
+    namespace: office
+    name: deployment-manager
+  rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["deployments", "replicasets", "pods"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
+
+#RoleBinding
+
+kind: RoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1beta1
+  metadata:
+    name: deployment-manager-binding
+    namespace: office
+  subjects:
+  - kind: User
+    name: employee
+    apiGroup: ""
+  roleRef:
+    kind: Role
+    name: deployment-manager
+    apiGroup: ""
   
 1) Get pods in a service
 2) troubleshoor services
