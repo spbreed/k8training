@@ -71,11 +71,13 @@ This Pod can be scheduled on a node that has the taint
 - dedicated=experimental:NoSchedule:
 - key,operator,value,effect
 
-```tolerations:
+```
+tolerations:
 - key: dedicated
   operator: Equal
   value: experimental
-  effect: NoSchedule```
+  effect: NoSchedule
+```
 
 kubectl create namespace office
 
