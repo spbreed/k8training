@@ -39,6 +39,28 @@
 create pv
 create pvc
 create volume
+Attach to pod
+
+## Resource quota
+- Create NS
+- Create quotas
+- Create deployments
+
+## Cluster IPS
+- Cluster IP (default)
+- Nodeport -> NodeIP port + ClusterIP
+- Load balancer -> LB IP + NodeIP port + ClusterIP
+
+## Deployments
+- Replication Controllers
+- Replicasets (Advanced selectors but no rolling updates) 
+- Deployments
+
+## Daemonsets
+- Daemon sets bypasses K8 scheduler and do the scheduling based on the labels.Assign the labels and update the deployment
+
+## SVC
+kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=gcr.io/google-samples/node-hello:1.0 --port=8080
 
 ## Taints and Tolerations:
 This Pod can be scheduled on a node that has the taint 
@@ -52,6 +74,15 @@ tolerations:
   effect: NoSchedule
 
 kubectl create namespace office
+
+## Node upgrade:
+
+kubectl get nodes
+kubectl drain node2 --ignore-daemonsets
+apt-get update
+apt-get upgrade
+systemctl status kubelet 
+kubectl uncordon node2 
 
 ## Create User :
 
@@ -98,6 +129,7 @@ kind: RoleBinding
 ### troubleshoot services
 - kubeadm -init installs master node 
 - starts a kubelet service "systemctl | grep kubelet-service"
+- ps -aux | grep kubelet
 - kubelet service watches /etc/kubernetes/manifests folder
   - kube-apiserver.yaml (for API service)
   - kube-controller-manager.yaml (controller)
@@ -110,12 +142,24 @@ kind: RoleBinding
   - kube-proxy
 - ps aux | grep kube-proxy
 - delete and create kube-proxy pod
+- check iptables
 
 3) troubleshoot pods
+- kubectl run (creates a depolyment)
+- kubectl exec (executes something)
+- kubectl run busybox --image=busybox --command sleep "3600" 
+- kubectl run -it --rm --restart=Never busybox --image=busybox -- sh
 - kubectl exec -it busybox -- nslookup nginx-svc
 
+svc -> endpoint -> pods -> proxy
+
 4) dns services and pods nslookups
+kubedns -> stub domains -> upstream servers
+
 5) etcd 
+
 6) static pods, system ctl pods
+
+
 7) init containers
 8) Rollout history
