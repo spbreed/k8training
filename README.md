@@ -40,9 +40,9 @@ wget https://raw.githubusercontent.com/spbreed/k8training/master/SOLUTIONS/train
 - Log in to each of your Kubernetes nodes, including the master, and execute the command sudo apt install nfs-common
 
 ## Persistent Volume
-create pv
-create pvc
-create volume
+- create pv
+- create pvc
+- create volume
 Attach to pod
 
 ## Resource quota
@@ -64,7 +64,7 @@ Attach to pod
 - Daemon sets bypasses K8 scheduler and do the scheduling based on the labels.Assign the labels and update the deployment
 
 ## SVC
-kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=gcr.io/google-samples/node-hello:1.0 --port=8080
+```kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=gcr.io/google-samples/node-hello:1.0 --port=8080```
 
 ## Taints and Tolerations:
 This Pod can be scheduled on a node that has the taint 
