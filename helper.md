@@ -86,10 +86,15 @@ kubectl uncordon node2
 
 ## Create User :
 
+### Create key
 openssl genrsa -out employee.key 2048
+### Create CSR using key
 openssl req -new -key employee.key -out employee.csr -subj "/CN=employee/O=bitnami"
+### Create CRT using CSR and CA
 openssl x509 -req -in employee.csr -CA CA_LOCATION/ca.crt -CAkey CA_LOCATION/ca.key -CAcreateserial -out employee.crt -days 500
+### Create user with CRT & Key
 kubectl config set-credentials employee --client-certificate=/home/employee/.certs/employee.crt  --client-key=/home/employee/.certs/employee.key
+### Set context
 kubectl config set-context employee-context --cluster=minikube --namespace=office --user=employee
 kubectl --context=employee-context get pods
 
@@ -105,7 +110,7 @@ kind: Role
     resources: ["deployments", "replicasets", "pods"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
 
-## RoleBinding
+## RoleBinding (Assign user to role)
 
 kind: RoleBinding
   apiVersion: rbac.authorization.k8s.io/v1beta1
