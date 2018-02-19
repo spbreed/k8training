@@ -71,22 +71,22 @@ This Pod can be scheduled on a node that has the taint
 - dedicated=experimental:NoSchedule:
 - key,operator,value,effect
 
-tolerations:
+```tolerations:
 - key: dedicated
   operator: Equal
   value: experimental
-  effect: NoSchedule
+  effect: NoSchedule```
 
 kubectl create namespace office
 
 ## Node upgrade:
 
-kubectl get nodes
-kubectl drain node2 --ignore-daemonsets
-apt-get update
-apt-get upgrade
-systemctl status kubelet 
-kubectl uncordon node2 
+- kubectl get nodes
+- kubectl drain node2 --ignore-daemonsets
+- apt-get update
+- apt-get upgrade
+- systemctl status kubelet 
+- kubectl uncordon node2 
 
 ## Create User :
 
@@ -103,7 +103,7 @@ kubectl config set-context employee-context --cluster=minikube --namespace=offic
 kubectl --context=employee-context get pods
 
 ## Create Role
-
+```
 kind: Role
   apiVersion: rbac.authorization.k8s.io/v1beta1
   metadata:
@@ -113,9 +113,10 @@ kind: Role
   - apiGroups: ["", "extensions", "apps"]
     resources: ["deployments", "replicasets", "pods"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"] # You can also use ["*"]
-
+```
 ## RoleBinding (Assign user to role)
 
+```
 kind: RoleBinding
   apiVersion: rbac.authorization.k8s.io/v1beta1
   metadata:
@@ -129,7 +130,7 @@ kind: RoleBinding
     kind: Role
     name: deployment-manager
     apiGroup: ""
-  
+```  
 ## Misc
 ### Get pods in a service
 - kubectl get endpoints 
@@ -166,9 +167,6 @@ svc -> endpoint -> pods -> proxy
 kubedns -> stub domains -> upstream servers
 
 5) etcd 
-
 6) static pods, system ctl pods
-
-
 7) init containers
 8) Rollout history
