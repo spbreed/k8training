@@ -139,6 +139,10 @@ kind: RoleBinding
 - kubectl get ep/svc-name -o json | jq '.subsets[].addresses[].targetRef.name'
 
 ### troubleshoot services
+- Start service:
+- systemctl | grep kub
+- dpkg -l | grep docker
+
 - kubeadm -init installs master node 
 - starts a kubelet service "systemctl | grep kubelet-service"
 - ps -aux | grep kubelet
