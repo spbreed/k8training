@@ -18,6 +18,10 @@ wget https://raw.githubusercontent.com/spbreed/k8training/master/SOLUTIONS/train
 - ctl + b -> % vertical
 - ctl + b -> up 
 
+### Autocomplete:
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
 ## Kubernetes 
  
  Kube token:
@@ -160,7 +164,7 @@ kind: RoleBinding
 - delete and create kube-proxy pod
 - check iptables
 
-3) troubleshoot pods
+1) troubleshoot pods
 - kubectl run (creates a depolyment)
 - kubectl exec (executes something)
 - kubectl run busybox --image=busybox --command sleep "3600" 
