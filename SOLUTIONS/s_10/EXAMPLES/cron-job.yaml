@@ -4,7 +4,7 @@ metadata:
   name: date
 spec:
   schedule: "*/1 * * * *"
-  jobTemplate:
+  Template:
     spec:
       template:
         spec:

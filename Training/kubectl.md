@@ -1,4 +1,8 @@
-Kube token:
+#Kubectl examples
+https://github.com/kubernetes/website/tree/master/content/en/examples
+wget https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/controllers/frontend.yaml
+
+#Kube token:
 
  - kubeadm token create
  - kubectl cluster-info

@@ -11,6 +11,8 @@ source <(kubectl completion bash)
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 ## Shorthand
+
+alias kk='kubectl'
 alias kkgd='kubectl get deployments'
 alias kkgp='kubectl get pods'
 alias kkgj='kubectl get jobs'
@@ -35,7 +37,16 @@ alias kka='kubectl apply -f'
 alias kkdf='kubectl delete -f'
 alias kkcc='kubectl config current-context'
 alias kkx='kubectl exec -it'
+alias kkr='kubectl run -it --rm --restart=Never'
 alias kkuc='kubectl config use-context'
+alias kkcd='kubectl create deployment'
+alias kkcf='kubectl create -f'
+alias kktn='kubectl taint nodes --all'
+alias kkdn=' kubectl describe node'
+alias kkcn='kubectl create namespace'
+alias kkrh='kubectl rollout history'
+alias kkcurl='kubectl run -it --rm --restart=Never --image=radial/busyboxplus -- sh'
+
 
 ## paste:
 :set paste
