@@ -3,6 +3,8 @@
 - Shift -> D delete line
 - D -> g delete after cursor
 - :g/^$/d -> empty lines
+- kubectl describe nodes node01 | grep Label -C 5
+- kubectl run --generator=run-pod/v1 --image=busybox static-busybox --dry-run -o yaml --command -- sleep 1000
 
 - grep -A 5
 
@@ -12,6 +14,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 ## Shorthand
 
+echo "source <(kubectl completion bash)" >> ~/.bashrc
 alias kk='kubectl'
 alias kkgd='kubectl get deployments'
 alias kkgp='kubectl get pods'
